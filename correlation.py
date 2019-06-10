@@ -50,7 +50,7 @@ def correlation(data_fem1, data_fem2, percentage=0.10):
 
     # Indexing datas by KDTree
     tree_fem1 = KDTree(data_fem1, leaf_size=2, metric='euclidean')
-    tree_fem2 = KDTree(data_fem2, leaf_size=2, metric='euclidean')
+    tree_fem2 = KDTree(data_fem2, leaf_size=2, metric='manhattan')
 
     # Calculate distances between all elements in data_fem1 and data_fem2
     # p=1 is the sum-of-absolute-values “Manhattan”
@@ -58,8 +58,6 @@ def correlation(data_fem1, data_fem2, percentage=0.10):
     # p=3 is the maximum-coordinate-difference distance
     distances_fem1, elements_fem1 = tree_fem1.query(data_fem1, k=len(data_fem1))
     distances_fem2, elements_fem2 = tree_fem2.query(data_fem2, k=len(data_fem2))
-
-    print(distances_fem1)
 
     # Ordered lists by element index
     for i in range(elements_total):
@@ -77,13 +75,6 @@ def correlation(data_fem1, data_fem2, percentage=0.10):
         value_corr.append(pearsonr(distances_data1, distances_data2)[0])
     
     value_corr = np.mean(value_corr)
-    
-    # Calculation of correlation using concatenation of distances and applying pearson
-    # distances_data1 = [x for sub_list in distances_fem1 for x in sub_list]
-    # distances_data2 = [x for sub_list in distances_fem1 for x in sub_list]
-
-    # correlation = pearsonr(distances_data1, distances_data2)[0]
-
     return value_corr
 
 def main(argv):
@@ -92,10 +83,10 @@ def main(argv):
 
     path_fem1 = sys.argv[1]
     path_fem2 = sys.argv[2]
-    percentage = sys.argv[3]
+    percentage = float(sys.argv[3])
     
     data_fem1, data_fem2 = read_archives(path_fem1, path_fem2)
-    value_corr = correlation(data_fem1, data_fem2, percentage=1)
+    value_corr = correlation(data_fem1, data_fem2, percentage)
 
     print(value_corr)
 
