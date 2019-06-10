@@ -48,14 +48,15 @@ def correlation(data_fem1, data_fem2, percentage=0.10):
     data_fem1 = data_fem1.iloc[list_elements]
     data_fem2 = data_fem2.iloc[list_elements]
 
-    # Indexing datas by KDTree
+    """
+    The distance metric to use for the KDtree.
+    Default=’minkowski’ with p=2 (that is, a euclidean metric).
+    See the documentation of the DistanceMetric class for a list of available metrics.
+    """
     tree_fem1 = KDTree(data_fem1, leaf_size=2, metric='euclidean')
-    tree_fem2 = KDTree(data_fem2, leaf_size=2, metric='manhattan')
+    tree_fem2 = KDTree(data_fem2, leaf_size=2, metric='euclidean')
 
     # Calculate distances between all elements in data_fem1 and data_fem2
-    # p=1 is the sum-of-absolute-values “Manhattan”
-    # p=2 is the usual Euclidean
-    # p=3 is the maximum-coordinate-difference distance
     distances_fem1, elements_fem1 = tree_fem1.query(data_fem1, k=len(data_fem1))
     distances_fem2, elements_fem2 = tree_fem2.query(data_fem2, k=len(data_fem2))
 
