@@ -39,7 +39,6 @@ def hull_of_foci(data_fem, n_focis=1):
         if greater_distance[0] not in result:
             result.append(greater_distance[0])
             object_row = data_fem.iloc[greater_distance[0]]
-        
     if n_focis == 1:
         result = [result[0]]
 
