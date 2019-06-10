@@ -38,11 +38,7 @@ def correlation(data_fem1, data_fem2, percentage=0.10):
     data_fem1 = data_fem1.iloc[list_elements]
     data_fem2 = data_fem2.iloc[list_elements]
 
-    """
-    The distance metric to use for the KDtree.
-    Default=’minkowski’ with p=2 (that is, a euclidean metric).
-    See the documentation of the DistanceMetric class for a list of available metrics.
-    """
+    # See the documentation of the DistanceMetric class for a list of available metrics
     tree_fem1 = KDTree(data_fem1, leaf_size=2, metric='euclidean')
     tree_fem2 = KDTree(data_fem2, leaf_size=2, metric='euclidean')
 

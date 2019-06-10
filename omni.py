@@ -14,10 +14,7 @@ import numpy as np
 import sys
 
 
-"""
-This code is an implementation of the Omni Technique proposed by: Traina Jr. C. in
-The Omni-family of all-purpose access methods: a simple and effective way to make similarity search more efficient, (2007)."""
-
+# This code is an implementation of the Omni Technique proposed by: Traina Jr. C. (2017)
 
 # ------------------------------------------------
 # Algorithm to find a good foci base
