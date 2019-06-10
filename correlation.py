@@ -6,7 +6,6 @@
 #
 # Verified on June 10th, 2019.
 
-
 from sklearn.neighbors import KDTree
 from scipy.stats import pearsonr
 from utils import read_archives
