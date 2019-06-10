@@ -65,7 +65,6 @@ def hull_of_foci(data_fem, n_focis=1):
 
             result.append(smaller[1])
         n_focis = n_focis-1
-
     return result
 
 

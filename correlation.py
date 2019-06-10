@@ -64,7 +64,6 @@ def correlation(data_fem1, data_fem2, percentage=0.10):
         distances_data1 = distances_fem1[elem]
         distances_data2 = distances_fem2[elem]
         value_corr.append(pearsonr(distances_data1, distances_data2)[0])
-    
     value_corr = np.mean(value_corr)
     return value_corr
 
