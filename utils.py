@@ -12,10 +12,9 @@ import pandas as pd
 # ------------------------------------------------
 #               Read the FEMs archives
 # ------------------------------------------------
-def read_archives(path_fem1, path_fem2):
+def read_archives(path_fem):
     try:
-        data_fem1 = pd.read_csv(path_fem1, sep=';', header=None)
-        data_fem2 = pd.read_csv(path_fem2, sep=';', header=None)
-        return data_fem1, data_fem2
+        data_fem1 = pd.read_csv(path_fem, sep=';', header=None)
+        return data_fem1
     except NameError:
         return NameError

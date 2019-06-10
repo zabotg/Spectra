@@ -19,7 +19,7 @@ import warnings
 warnings.filterwarnings('ignore')
 
 """
-{This code describe the implementation of the correlation tecnique "PCMS"}
+This code describe the implementation of the correlation tecnique "PCMS"
 """
 
 # ------------------------------------------------
@@ -77,7 +77,8 @@ def main(argv):
     path_fem2 = sys.argv[2]
     percentage = float(sys.argv[3])
     
-    data_fem1, data_fem2 = read_archives(path_fem1, path_fem2)
+    data_fem1 = read_archives(path_fem1)
+    data_fem2 = read_archives(path_fem2)
     value_corr = correlation(data_fem1, data_fem2, percentage)
 
     print(value_corr)
