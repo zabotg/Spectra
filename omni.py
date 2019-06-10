@@ -32,7 +32,6 @@ def hull_of_foci(data_fem, n_focis=1):
 
         for row in data_fem.iterrows():
             dist = distance.euclidean(object_row, row[1])
-            
             if dist > greater_distance[1]:
                 greater_distance = [row[0], dist]
 
@@ -61,6 +60,44 @@ def hull_of_foci(data_fem, n_focis=1):
             result.append(smaller[1])
         n_focis = n_focis-1
     return result
+
+
+def list_distances(search_object, data_fem):
+    result = []
+    for row in data_fem.iterrows():
+        dist = distance.euclidean(data_fem.iloc[search_object], row[1])
+        result.append([row[0], dist])
+    return result
+
+
+def omni_candidates_generate(data, focis, radius, search_object):
+    result = []
+    for focus in focis:
+        result_temp = []
+        distances = list_distances(focus, data)
+        for dst in distances:
+            if dst[0] != search_object:
+                if distances[search_object][1] - radius <= dst[1] <= distances[search_object][1] + radius:
+                    result_temp.append(dst[0])
+        result.append(set(result_temp))
+    result = list(set.intersection(*result))
+    return result
+
+
+def omni_candidates_refinement(candidates, data_fem, radius, search_object):
+    result = []
+    for candidate in candidates:
+        dst = distance.euclidean(data_fem.iloc[search_object], data_fem.iloc[candidate])
+        if dst <= radius:
+            result.append(candidate)
+    return result
+
+
+def normalization_radius(radius, data_fem1, data_fem2, focis_fem1, focis_fem2):  # For two data spaces
+    max_distance_fem1 = distance.euclidean(data_fem1.iloc[focis_fem1[0]], data_fem1.iloc[focis_fem1[1]])
+    max_distance_fem2 = distance.euclidean(data_fem2.iloc[focis_fem2[0]], data_fem2.iloc[focis_fem2[1]])
+
+    return max_distance_fem1*radius, max_distance_fem2*radius
 
 
 def main(argv):
