@@ -12,7 +12,6 @@ from utils import read_archives
 
 import sys
 import numpy as np
-import pandas as pd
 import random
 
 import warnings
@@ -76,7 +75,7 @@ def main(argv):
     path_fem1 = sys.argv[1]
     path_fem2 = sys.argv[2]
     percentage = float(sys.argv[3])
-    
+
     data_fem1 = read_archives(path_fem1)
     data_fem2 = read_archives(path_fem2)
     value_corr = correlation(data_fem1, data_fem2, percentage)

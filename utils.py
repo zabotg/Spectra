@@ -6,7 +6,6 @@
 #
 # Verified on June 10th, 2019.
 
-import warnings
 import pandas as pd
 
 # ------------------------------------------------

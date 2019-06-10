@@ -50,7 +50,7 @@ def hull_of_foci(data_fem, n_focis=1):
     if n_focis > 3:
         edge = distance.euclidean(data_fem.iloc[result[0]], data_fem.iloc[result[1]])
         
-        for focus in range(n_focis - 2):
+        while n_focis-2 > 0:
             smaller = [np.inf, 0]
 
             for row in data_fem.iterrows():
@@ -60,11 +60,11 @@ def hull_of_foci(data_fem, n_focis=1):
                     for i in result:
                         dist = distance.euclidean(data_fem.iloc[i], row[1])
                         error = error + np.abs(edge - dist)  # Minimum error check
-                
                     if error < smaller[0]:
                         smaller = [error, row[0]]
 
             result.append(smaller[1])
+        n_focis = n_focis-1
 
     return result
 
