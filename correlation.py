@@ -17,9 +17,8 @@ import random
 import warnings
 warnings.filterwarnings('ignore')
 
-"""
-This code describe the implementation of the correlation tecnique "PCMS"
-"""
+
+# This code describe the implementation of the correlation tecnique PCMS
 
 # ------------------------------------------------
 # Calculates the correlation between FEM1 and FEM2

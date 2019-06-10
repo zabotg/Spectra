@@ -46,7 +46,6 @@ def hull_of_foci(data_fem, n_focis=1):
     # Find three or more elements
     if n_focis > 3:
         edge = distance.euclidean(data_fem.iloc[result[0]], data_fem.iloc[result[1]])
-        
         while n_focis-2 > 0:
             smaller = [np.inf, 0]
 
