@@ -9,6 +9,7 @@
 
 from sklearn.neighbors import KDTree
 from scipy.stats import pearsonr
+from utils import read_archives
 
 import sys
 import numpy as np
@@ -21,17 +22,6 @@ warnings.filterwarnings('ignore')
 """
 {This code describe the implementation of the correlation tecnique "PCMS"}
 """
-
-# ------------------------------------------------
-#               Read the FEMs archives
-# ------------------------------------------------
-def read_archives(path_fem1, path_fem2):
-    try:
-        data_fem1 = pd.read_csv(path_fem1, sep=';', header=None)
-        data_fem2 = pd.read_csv(path_fem2, sep=';', header=None)
-        return data_fem1, data_fem2
-    except NameError:
-        return NameError
 
 # ------------------------------------------------
 # Calculates the correlation between FEM1 and FEM2
