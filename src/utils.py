@@ -21,7 +21,7 @@ def read_archives(path_fem):
 
 
 # ------------------------------------------------
-#          Get all combinations of a list
+# Get all combinations of a list without repetitions
 # ------------------------------------------------
 def get_all_combinations(list_elem):
     return list(combinations(list_elem, 2))
