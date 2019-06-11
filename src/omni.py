@@ -4,7 +4,8 @@
 #   This code is under GNU General Public License v3.0.
 #   zabot.gui@gmail.com
 #
-# Verified on June 10th, 2019.
+# Verified on June 11th, 2019.
+# This code is an implementation of the Omni Technique proposed by: Traina Jr. C. (2017)
 
 from scipy.spatial import distance
 from utils import read_archives
@@ -13,8 +14,6 @@ import random
 import numpy as np
 import sys
 
-
-# This code is an implementation of the Omni Technique proposed by: Traina Jr. C. (2017)
 
 # ------------------------------------------------
 # Algorithm to find a good foci base
@@ -62,6 +61,9 @@ def hull_of_foci(data_fem, n_focis=1):
     return result
 
 
+# ------------------------------------------------
+# Generates a list of distances for a data_fem
+# ------------------------------------------------
 def list_distances(search_object, data_fem):
     result = []
     for row in data_fem.iterrows():
@@ -70,6 +72,9 @@ def list_distances(search_object, data_fem):
     return result
 
 
+# ------------------------------------------------
+# Selected possible candidates using the focis
+# ------------------------------------------------
 def omni_candidates_generation(data, focis, radius, search_object):
     result = []
     for focus in focis:
@@ -84,6 +89,9 @@ def omni_candidates_generation(data, focis, radius, search_object):
     return result
 
 
+# ------------------------------------------------
+# Refines the intersection of candidates generated
+# ------------------------------------------------
 def omni_candidates_refinement(candidates, data_fem, radius, search_object):
     result = []
     for candidate in candidates:
@@ -92,7 +100,9 @@ def omni_candidates_refinement(candidates, data_fem, radius, search_object):
             result.append(candidate)
     return result
 
-
+# ------------------------------------------------
+# Normalizes the radius of two spaces
+# ------------------------------------------------
 def normalization_radius(radius, data_fem1, data_fem2, focis_fem1, focis_fem2):  # For two data spaces
     max_distance_fem1 = distance.euclidean(data_fem1.iloc[focis_fem1[0]], data_fem1.iloc[focis_fem1[1]])
     max_distance_fem2 = distance.euclidean(data_fem2.iloc[focis_fem2[0]], data_fem2.iloc[focis_fem2[1]])
