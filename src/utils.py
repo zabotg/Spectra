@@ -7,6 +7,7 @@
 # Verified on June 10th, 2019.
 
 import pandas as pd
+from itertools import combinations
 
 # ------------------------------------------------
 #               Read the FEMs archives
@@ -17,3 +18,10 @@ def read_archives(path_fem):
         return data_fem1
     except NameError:
         return NameError
+
+
+# ------------------------------------------------
+#          Get all combinations of a list
+# ------------------------------------------------
+def get_all_combinations(list_elem):
+    return list(combinations(list_elem, 2))

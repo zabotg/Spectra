@@ -22,7 +22,6 @@ def candidates_generation(data_fem1, data_fem2, foci_fem1, foci_fem2, search_ele
 
     # Radius normalization for both data_fem
     radius_fem1, radius_fem2 = normalization_radius(radius, data_fem1, data_fem2, foci_fem1, foci_fem2)
-    
     # Generate candidates
     candidates_fem1 = omni_candidates_generation(data_fem1, foci_fem1, radius_fem1, search_element)
     candidates_fem2 = omni_candidates_generation(data_fem2, foci_fem2, radius_fem2, search_element)

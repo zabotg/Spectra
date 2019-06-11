@@ -23,7 +23,7 @@ warnings.filterwarnings('ignore')
 # ------------------------------------------------
 # Calculates the correlation between FEM1 and FEM2
 # ------------------------------------------------
-def correlation(data_fem1, data_fem2, percentage=0.10):
+def correlation(data_fem1, data_fem2, percentage=0.10, metric1='euclidean', metric2='euclidean'):
     size_fem1 = len(data_fem1.index)
     size_fem2 = len(data_fem2.index)
 
@@ -38,8 +38,8 @@ def correlation(data_fem1, data_fem2, percentage=0.10):
     data_fem2 = data_fem2.iloc[list_elements]
 
     # See the documentation of the DistanceMetric class for a list of available metrics
-    tree_fem1 = KDTree(data_fem1, leaf_size=2, metric='euclidean')
-    tree_fem2 = KDTree(data_fem2, leaf_size=2, metric='euclidean')
+    tree_fem1 = KDTree(data_fem1, leaf_size=2, metric=metric1)
+    tree_fem2 = KDTree(data_fem2, leaf_size=2, metric=metric2)
 
     # Calculate distances between all elements in data_fem1 and data_fem2
     distances_fem1, elements_fem1 = tree_fem1.query(data_fem1, k=len(data_fem1))
@@ -72,7 +72,11 @@ def main(argv):
 
     data_fem1 = read_archives(path_fem1)
     data_fem2 = read_archives(path_fem2)
-    value_corr = correlation(data_fem1, data_fem2, percentage)
+
+    metric1 = 'minkowski'
+    metric2 = 'euclidean'
+
+    value_corr = correlation(data_fem1, data_fem2, percentage, metric1, metric2)
 
     print(value_corr)
 
