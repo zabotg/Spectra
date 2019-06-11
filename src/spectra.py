@@ -8,11 +8,8 @@
 # This code is an implementation of the Omni Technique proposed by: Traina Jr. C. (2017)
 
 from utils import read_archives
-from correlation import read_archives
 from omni import *
 import sys
-import numpy as np
-
 
 # ------------------------------------------------
 # Selected possible candidates using the focis

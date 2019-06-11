@@ -8,11 +8,9 @@
 # This code is an implementation of the Omni Technique proposed by: Traina Jr. C. (2017)
 
 from scipy.spatial import distance
-from utils import read_archives
 
 import random
 import numpy as np
-import sys
 
 
 # ------------------------------------------------
