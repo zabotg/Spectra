@@ -70,7 +70,7 @@ def list_distances(search_object, data_fem):
     return result
 
 
-def omni_candidates_generate(data, focis, radius, search_object):
+def omni_candidates_generation(data, focis, radius, search_object):
     result = []
     for focus in focis:
         result_temp = []
@@ -96,19 +96,4 @@ def omni_candidates_refinement(candidates, data_fem, radius, search_object):
 def normalization_radius(radius, data_fem1, data_fem2, focis_fem1, focis_fem2):  # For two data spaces
     max_distance_fem1 = distance.euclidean(data_fem1.iloc[focis_fem1[0]], data_fem1.iloc[focis_fem1[1]])
     max_distance_fem2 = distance.euclidean(data_fem2.iloc[focis_fem2[0]], data_fem2.iloc[focis_fem2[1]])
-
     return max_distance_fem1*radius, max_distance_fem2*radius
-
-
-def main(argv):
-    path_fem1 = sys.argv[1]
-    path_fem2 = sys.argv[2]
-
-    data_fem1 = read_archives(path_fem1)
-    data_fem2 = read_archives(path_fem2)
-
-    print(hull_of_foci(data_fem1, 1))
-    print(hull_of_foci(data_fem2, 2))
-
-if __name__ == "__main__":
-    main(sys.argv[1:])

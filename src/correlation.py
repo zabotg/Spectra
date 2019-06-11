@@ -63,7 +63,7 @@ def correlation(data_fem1, data_fem2, percentage=0.10):
     return value_corr
 
 def main(argv):
-    if len(argv) < 3:
+    if len(argv) != 3:
         sys.exit("ERROR Number of arguments is different from three.")
 
     path_fem1 = sys.argv[1]
