@@ -23,6 +23,17 @@ def main():
    # Read combinations FEMs and Distances in order
    comb_fem = read_combinations(comb_fem_path)
    comb_dist = read_combinations(comb_dist_path)
+   file = open("result-correlation.txt","w") 
+
+   for metric1, metric2 in comb_dist:
+        for name_fem1, name_fem2 in comb_fem:
+            data_fem1 = read_archives(dataset_path.format(name_fem1))
+            data_fem2 = read_archives(dataset_path.format(name_fem2))
+
+            corr = correlation(data_fem1, data_fem2, percentage=1, metric1=metric1, metric2=metric2)
+            print(metric1, metric2, name_fem1, name_fem2, corr)
+            file.write("{};{};{};{};{}\n".format(metric1,metric2,name_fem1,name_fem2,corr))
+    file.close()
 
 if __name__ == "__main__":
    main()

@@ -2,5 +2,4 @@
 
 <img src="https://github.com/zabotg/Spectra/blob/master/archives/spectra-logo.png" width="150" height="180"/>
 
-
 <b>Efficient Indexing of Multiple Metric Spaces</b>

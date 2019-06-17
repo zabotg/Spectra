@@ -17,7 +17,6 @@ def main():
     # Read combinations FEMs and Distances in order
     comb_fem = read_combinations(comb_fem_path)
     comb_dist = read_combinations(comb_dist_path)
-
     file = open("result-correlation.txt","w") 
 
     for metric1, metric2 in comb_dist:
