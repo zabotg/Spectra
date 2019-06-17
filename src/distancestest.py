@@ -33,7 +33,7 @@ def main():
             corr = correlation(data_fem1, data_fem2, percentage=1, metric1=metric1, metric2=metric2)
             print(metric1, metric2, name_fem1, name_fem2, corr)
             file.write("{};{};{};{};{}\n".format(metric1,metric2,name_fem1,name_fem2,corr))
-    file.close()
+   file.close()
 
 if __name__ == "__main__":
    main()

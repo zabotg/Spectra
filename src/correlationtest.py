@@ -1,7 +1,13 @@
+# coding=utf-8
+#
+#   Copyright 2019, Guilherme Felipe Zabot, all rights reserved.
+#   This code is under GNU General Public License v3.0.
+#   zabot.gui@gmail.com
+#
+# Verified on June 17th, 2019.
+
 from utils import read_archives
 from correlation import correlation
-
-import pandas as pd
 
 def read_combinations(path):
     text_file = open(path, 'r')
@@ -17,7 +23,7 @@ def main():
     # Read combinations FEMs and Distances in order
     comb_fem = read_combinations(comb_fem_path)
     comb_dist = read_combinations(comb_dist_path)
-    file = open("result-correlation.txt","w") 
+    file = open("result-correlation.txt","w")
 
     for metric1, metric2 in comb_dist:
         for name_fem1, name_fem2 in comb_fem:
