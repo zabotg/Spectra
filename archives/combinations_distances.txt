@@ -2,14 +2,9 @@ euclidean,euclidean
 euclidean,manhattan
 euclidean,chebyshev
 euclidean,minkowski
-euclidean,mahalanobis
 manhattan,manhattan
 manhattan,chebyshev
 manhattan,minkowski
-manhattan,mahalanobis
 chebyshev,chebyshev
 chebyshev,minkowski
-chebyshev,mahalanobis
 minkowski,minkowski
-minkowski,mahalanobis
-mahalanobis,mahalanobis

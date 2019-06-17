@@ -73,7 +73,7 @@ def main(argv):
     data_fem1 = read_archives(path_fem1)
     data_fem2 = read_archives(path_fem2)
 
-    metric1 = 'minkowski'
+    metric1 = 'euclidean'
     metric2 = 'euclidean'
 
     value_corr = correlation(data_fem1, data_fem2, percentage, metric1, metric2)
