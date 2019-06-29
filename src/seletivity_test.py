@@ -4,41 +4,86 @@
 #   This code is under GNU General Public License v3.0.
 #   zabot.gui@gmail.com
 #
-# Verified on June 17th, 2019.
+# Verified on June 11th, 2019.
+# This code is an implementation of the Omni Technique proposed by: Traina Jr. C. (2017)
 
 from utils import read_archives
-from correlation import correlation
-import random
+from omni import *
+import sys
 
+# ------------------------------------------------
+# Read Combinations
+# ------------------------------------------------
 def read_combinations(path):
-   text_file = open(path, 'r')
-   combinations = [line.replace('\n', '').split(',') for line in text_file.readlines()]
-   text_file.close()
-   return combinations
+    text_file = open(path, 'r')
+    combinations = [line.replace('\n', '').split(',') for line in text_file.readlines()]
+    text_file.close()
+    return combinations
+
+# ------------------------------------------------
+# Traditional Approach
+# ------------------------------------------------
+def traditional_approach(data_fem1, data_fem2, search_element, radius, dist1, dist2):
+   # Find foci to data_fem and data_fem2
+   # By default, the number of foci n_foci=2
+   foci_fem1 = hull_of_foci(data_fem1, n_focis=2, dist=dist1)
+   foci_fem2 = hull_of_foci(data_fem2, n_focis=2, dist=dist2)
+
+   # Radius normalization for both data_fem
+   radius_fem1, radius_fem2 = normalization_radius(radius, data_fem1, data_fem2, foci_fem1, foci_fem2)
+
+   # Generation of candidates using the focis
+   candidates_fem1 = omni_candidates_generation(data_fem1, foci_fem1, radius_fem1, search_element)
+   candidates_fem2 = omni_candidates_generation(data_fem2, foci_fem2, radius_fem2, search_element)
+
+   # Intersect candidates
+   candidates_intersection = list(set(candidates_fem1).intersection(set(candidates_fem2)))
+
+   # Refines the intersection of candidates generated
+   refinement_fem1 = omni_candidates_refinement(candidates_intersection, data_fem1, radius_fem1, search_element, dist=dist1)
+   refinement_fem2 = omni_candidates_refinement(candidates_intersection, data_fem2, radius_fem2, search_element, dist=dist2)
+
+   # Final query resulta
+   return list(set(refinement_fem1).intersection(set(refinement_fem2)))
+
+# ------------------------------------------------
+# Proposal Approach
+# ------------------------------------------------
+def proposal_approach(data_fem1, data_fem2, search_element, radius, dist1, dist2):
+   # Find foci to data_fem and data_fem2
+   # By default, the number of foci n_foci=2
+   foci_fem1 = hull_of_foci(data_fem1, n_focis=2, dist=dist1)
+   foci_fem2 = hull_of_foci(data_fem2, n_focis=2, dist=dist2)
+
+   # Radius normalization for both data_fem
+   radius_fem1, radius_fem2 = normalization_radius(radius, data_fem1, data_fem2, foci_fem1, foci_fem2)
+
+   # Generation of candidates using the focis
+   candidates_fem1 = omni_candidates_generation(data_fem1, foci_fem1, radius_fem1, search_element)
+   candidates_fem2 = omni_candidates_generation(data_fem2, foci_fem2, radius_fem2, search_element)
+
+   # Refines the intersection of candidates generated
+   refinement_fem1 = omni_candidates_refinement(candidates_fem1, data_fem1, radius_fem1, search_element, dist1)
+   refinement_fem2 = omni_candidates_refinement(candidates_fem2, data_fem2, radius_fem2, search_element, dist2)
+
+   # Final query resulta
+   return list(set(refinement_fem1).intersection(set(refinement_fem2)))
+
 
 def main():
-   comb_fem_path = "/home/zabot/Documents/Documents/Codes/Mestrado/Spectra/archives/combinations_fem.txt"
-   comb_dist_path = "/home/zabot/Documents/Documents/Codes/Mestrado/Spectra/archives/combinations_distances.txt"
+   data_fem1 = read_archives('/home/zabot/Documents/Datasets/Lung-HCRP/Features/LBP.csv')
+   data_fem2 = read_archives('/home/zabot/Documents/Datasets/Lung-HCRP/Features/colorLayout.csv')
+   distances_combinations = read_combinations('/home/zabot/Documents/Documents/Codes/Mestrado/Spectra/archives/spatialdistances.txt')
 
-   # Read combinations FEMs and Distances in order
-   comb_fem = read_combinations(comb_fem_path)
-   comb_dist = read_combinations(comb_dist_path)
+   search_element = 15
+   radius = 0.4
 
-   #Writing output to a single file
-   file = open("result-selectivity-Lung.txt","w")
-   file.close
-
-   #Generating a list of 20 random elements
-   random.seed(123)
-   list_elements = random.sample(range(0, 50), 20)
-   print(list_elements)
-
-   # #Get combinations of FEMs
-   # for fem1, fem2 in comb_fem:
-   #    print(fem1, fem2)
-
-   #    for dist1, dist2 in comb_dist:
-   #       print(dist1, dist2)
+   for dist1, dist2 in distances_combinations:
+      print(dist1, dist2)
+      result_traditional = traditional_approach(data_fem1, data_fem2, search_element, radius, dist1, dist2)
+      result_proposal = proposal_approach(data_fem1, data_fem2, search_element, radius, dist1, dist2)
+      print(result_traditional)
+      print(result_proposal)
 
 if __name__ == "__main__":
     main()
